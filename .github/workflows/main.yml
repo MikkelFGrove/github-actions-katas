@@ -10,6 +10,8 @@ jobs:
     container: gradle:6-jdk11
     steps:
       - name: Clone down repository
+        with:
+          fetch-depth: 0
         uses: actions/checkout@v4       
       - run: ci/build-app.sh
       - name: test
