@@ -1,5 +1,13 @@
 name: Main workflow
-on: push
+
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 env:
   docker_username: mikkelfgrove
   docker_password: ${{ secrets.GITHUB_TOKEN }}
@@ -10,6 +18,8 @@ jobs:
     container: gradle:6-jdk11
     steps:
       - name: Clone down repository
+        with:
+          fetch-depth: 0
         uses: actions/checkout@v4       
       - run: ci/build-app.sh
       - name: test
